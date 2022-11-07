@@ -1,5 +1,6 @@
 import random
-from datetime import datetime
+from datetime import datetime, date
+import os
 
 class Utils:
     
@@ -12,10 +13,13 @@ class Utils:
             lines = url_file.readlines()
             lines = [line.strip() for line in lines if len(line) > 5]
             lines = list(dict.fromkeys(lines))
-            # lines = random.sample(lines, 40)
+            lines = random.sample(lines, 40)
             return lines
         except:
             return False
 
     def create_video_folder(self):
+        path = f'channels/{self.channel}/Videos/Video_{datetime.now().date()}'
+        os.mkdir(path)
+        return path
 
