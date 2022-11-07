@@ -1,4 +1,4 @@
-
+from utils import Utils
 
 class DownloaderHandler:
     
@@ -6,5 +6,5 @@ class DownloaderHandler:
         self.channel = channel
 
     def handler(self):
-        pass
-        
+        url_list = Utils(channel=self.channel).get_url_list()
+        print(url_list)
