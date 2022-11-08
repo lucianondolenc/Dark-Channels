@@ -7,7 +7,7 @@ class DownloaderHandler:
 
     def handler(self):
         url_list = Utils(channel=self.channel).get_url_list()
-        if url_list != False:
+        if url_list:
             response = Utils(channel=self.channel).create_video_folder()
             for url in url_list:        
                 if "instagram" in url:
