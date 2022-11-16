@@ -4,11 +4,12 @@ import os
 
 class Utils:
     
-    def __init__(self, channel=None, url=None, url_list=None, item_name=None, file_path=None) -> None:
+    def __init__(self, channel=None, url=None, url_list=None, item_name=None, series_folder=None, file_path=None) -> None:
         self.channel       = channel
         self.url           = url
         self.url_list      = url_list
         self.item_name     = item_name
+        self.series_folder = series_folder
         self.file_path     = file_path
 
     def get_url_list(self):
@@ -29,10 +30,16 @@ class Utils:
         if url_list:
             return url_list
         else:
-            return False        
+            return False
+
+    def create_video_series_folder(self):
+        series_folder = f'Video_Series_{datetime.now().strftime("%m-%d-%Y")}_{datetime.now().strftime("%H-%M-%S")}'
+        series_path = f'channels/{self.channel}/Videos/{series_folder}'
+        os.mkdir(series_path)
+        return series_folder        
 
     def create_video_folder(self):
-        path = f'channels/{self.channel}/Videos/Video_{self.url}_{datetime.now().strftime("%m-%d-%Y")}_{datetime.now().strftime("%H-%M-%S")}'
+        path = f'channels/{self.channel}/Videos/{self.series_folder}/Video_{self.url}'
         os.mkdir(path)
         return path
 
