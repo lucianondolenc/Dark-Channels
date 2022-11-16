@@ -19,9 +19,9 @@ class DownloaderHandler:
                     if 'instagram' in url:
                         response = Instagram(url=url,path=path).download_video()
                         if not response:
-                            error_list.append(url)
-                        else:
                             historic_list.append(url)
+                        else:
+                            error_list.append(url)
                     elif 'tiktok' in url:
                         pass
                 Utils(item_name=item_name, url_list=error_list, file_path=f'channels/{self.channel}/Arquivos/error/error_{item_name}.txt').update_file()

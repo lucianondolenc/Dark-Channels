@@ -13,7 +13,7 @@ class Instagram:
         try:
             media_pk =cl.media_pk_from_url(self.url)
             cl.clip_download(media_pk=media_pk, folder=f'{self.path}/')
-            return None
+            return False
         except:
             print(f'Falha ao baixar vídeo: {self.url}')
             return self.url
