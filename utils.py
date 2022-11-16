@@ -27,7 +27,7 @@ class Utils:
                 url_dict = {file:lines}
                 url_list.append(url_dict)
             except:
-                print(f'O arquivo {file} não possui até 40 urls.')
+                print(f'O arquivo {file}.txt não possui até 40 urls.')
         if url_list:
             return url_list
         else:
