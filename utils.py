@@ -38,7 +38,7 @@ class Utils:
     
     def update_error_file(self):
         error_file = open(f'channels/{self.channel}/Arquivos/error/error_{self.item_name}.txt', 'r', encoding='utf-8')
-
+        
         print(f'Arquivo error_{self.item_name}.txt atualizado com sucesso.')
         pass
 
