@@ -4,12 +4,12 @@ import os
 
 class Utils:
     
-    def __init__(self, channel=None, url=None, error_list=None, historic_list=None, item_name=None) -> None:
+    def __init__(self, channel=None, url=None, url_list=None, item_name=None, file_path=None) -> None:
         self.channel       = channel
         self.url           = url
-        self.error_list    = error_list
-        self.historic_list = historic_list
+        self.url_list      = url_list
         self.item_name     = item_name
+        self.file_path     = file_path
 
     def get_url_list(self):
         files = os.listdir(f'channels/{self.channel}/Arquivos/urls/')
@@ -21,7 +21,7 @@ class Utils:
                 lines = url_file.readlines()
                 lines = [line.strip() for line in lines if len(line) > 5]
                 lines = list(dict.fromkeys(lines))
-                lines = random.sample(lines, 40)
+                lines = random.sample(lines, 8)
                 url_dict = {file:lines}
                 url_list.append(url_dict)
             except:
@@ -35,15 +35,33 @@ class Utils:
         path = f'channels/{self.channel}/Videos/Video_{self.url}_{datetime.now().strftime("%m-%d-%Y")}_{datetime.now().strftime("%H-%M-%S")}'
         os.mkdir(path)
         return path
-    
-    def update_error_file(self):
-        error_file = open(f'channels/{self.channel}/Arquivos/error/error_{self.item_name}.txt', 'r', encoding='utf-8')
+
+    def update_file(self):
+
+        # read the file
+        if 'url' in self.file_path:
+            file = open(f'{self.file_path}', 'r', encoding='utf-8')
+            lines = file.readlines()
+            lines = [line.strip() for line in lines if len(line) > 5]
+            lines = list(set(lines) - set(self.url_list))
+            lines = list(dict.fromkeys(lines))
+            file.close()
+        else:
+            file = open(f'{self.file_path}', 'r', encoding='utf-8')
+            lines = file.readlines()
+            lines = [line.strip() for line in lines if len(line) > 5]
+            lines = lines + self.url_list
+            lines = list(dict.fromkeys(lines))
+            file.close()
+
+        # write into the file
+        file = open(f'{self.file_path}', 'w', encoding='utf-8')
+        for url in lines:
+            file.write(url+'\n')
+        file.close()
         
-        print(f'Arquivo error_{self.item_name}.txt atualizado com sucesso.')
-        pass
+        return None
+        
 
-    def update_historic_file(self):
-        print(f'Arquivo historic_{self.item_name}.txt atualizado com sucesso.')
-        pass
-
-
+# if __name__ == '__main__':
+#     Utils(item_name='asmr', url_list=['https://www.instagram.com/reel/Ciu75XjA4vh/?igshid=NzNkNDdiOGI=', 'https://www.instagram.com/reel/CjGgNCuJSv7/?igshid=NzNkNDdiOGI='], file_path='channels/Dopaminando/Arquivos/urls/asmr.txt').update_file()

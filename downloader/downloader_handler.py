@@ -18,13 +18,14 @@ class DownloaderHandler:
                 for url in item[item_name]:       
                     if 'instagram' in url:
                         response = Instagram(url=url,path=path).download_video()
-                        response = None
                         if not response:
                             error_list.append(url)
                         else:
                             historic_list.append(url)
                     elif 'tiktok' in url:
                         pass
-                Utils(item_name=item_name, error_list=error_list).update_error_file()
-                Utils(item_name=item_name,historic_list=historic_list).update_historic_file()  
+                Utils(item_name=item_name, url_list=error_list, file_path=f'channels/{self.channel}/Arquivos/error/error_{item_name}.txt').update_file()
+                Utils(item_name=item_name, url_list=historic_list, file_path=f'channels/{self.channel}/Arquivos/historic/historic_{item_name}.txt').update_file()
+                Utils(item_name=item_name, url_list=historic_list, file_path=f'channels/{self.channel}/Arquivos/urls/{item_name}.txt').update_file()
+                 
                 
