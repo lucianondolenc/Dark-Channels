@@ -39,7 +39,7 @@ class Utils:
     def update_file(self):
 
         # read the file
-        if 'url' in self.file_path:
+        if 'urls' in self.file_path:
             file = open(f'{self.file_path}', 'r', encoding='utf-8')
             lines = file.readlines()
             lines = [line.strip() for line in lines if len(line) > 5]
