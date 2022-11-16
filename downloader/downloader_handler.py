@@ -10,8 +10,10 @@ class DownloaderHandler:
     def handler(self):
         url_list = Utils(channel=self.channel).get_url_list()
         series_folder = Utils(channel=self.channel).create_video_series_folder()
+        information_list = []
         if url_list:
             for item in url_list:
+                information_dict = {}
                 item_name = list(item.keys())[0]
                 path = Utils(channel=self.channel, url=item_name, series_folder=series_folder).create_video_folder()
                 historic_list = []

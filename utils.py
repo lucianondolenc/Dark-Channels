@@ -1,6 +1,7 @@
 import random
 from datetime import datetime, date
 import os
+import re
 
 class Utils:
     
@@ -44,7 +45,6 @@ class Utils:
         return path
 
     def update_file(self):
-
         # read the file
         if 'urls' in self.file_path:
             file = open(f'{self.file_path}', 'r', encoding='utf-8')
@@ -66,9 +66,16 @@ class Utils:
         for url in lines:
             file.write(url+'\n')
         file.close()
-        
-        return None
-        
 
-# if __name__ == '__main__':
-#     Utils(item_name='asmr', url_list=['https://www.instagram.com/reel/Ciu75XjA4vh/?igshid=NzNkNDdiOGI=', 'https://www.instagram.com/reel/CjGgNCuJSv7/?igshid=NzNkNDdiOGI='], file_path='channels/Dopaminando/Arquivos/urls/asmr.txt').update_file()
+        return None
+
+    def get_random_background(self):
+        backgrounds_list = os.listdir(f'channels/{self.channel}/Backgrounds/')
+        backgrounds_list = [item[:-4] for item in backgrounds_list if item[-4:] == '.jpg']
+        backgrounds_list = random.sample(backgrounds_list, 1)[0]
+        print(backgrounds_list)
+
+
+
+if __name__ == '__main__':
+    Utils(channel='Dopaminando').get_random_background()
