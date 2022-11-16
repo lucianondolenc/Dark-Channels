@@ -72,10 +72,10 @@ class Utils:
     def get_random_background(self):
         backgrounds_list = os.listdir(f'channels/{self.channel}/Backgrounds/')
         backgrounds_list = [item[:-4] for item in backgrounds_list if item[-4:] == '.jpg']
-        backgrounds_list = random.sample(backgrounds_list, 1)[0]
-        print(backgrounds_list)
+        background = random.sample(backgrounds_list, 1)[0]
+        return background
 
 
 
-if __name__ == '__main__':
-    Utils(channel='Dopaminando').get_random_background()
+# if __name__ == '__main__':
+#     Utils(channel='Dopaminando').get_random_background()

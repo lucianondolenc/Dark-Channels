@@ -10,10 +10,10 @@ class DownloaderHandler:
     def handler(self):
         url_list = Utils(channel=self.channel).get_url_list()
         series_folder = Utils(channel=self.channel).create_video_series_folder()
+        response = {'series_folder':series_folder, 'information':[]}
         information_list = []
         if url_list:
             for item in url_list:
-                information_dict = {}
                 item_name = list(item.keys())[0]
                 path = Utils(channel=self.channel, url=item_name, series_folder=series_folder).create_video_folder()
                 historic_list = []
@@ -27,9 +27,9 @@ class DownloaderHandler:
                             error_list.append(url)
                     elif 'tiktok' in url:
                         pass
-                Utils(item_name=item_name, url_list=error_list, file_path=f'channels/{self.channel}/Arquivos/error/error_{item_name}.txt').update_file()
-                Utils(item_name=item_name, url_list=historic_list, file_path=f'channels/{self.channel}/Arquivos/historic/historic_{item_name}.txt').update_file()
-                Utils(item_name=item_name, url_list=historic_list, file_path=f'channels/{self.channel}/Arquivos/urls/{item_name}.txt').update_file()
-        return series_folder
+                information_dict = {'item_name':item_name, 'historical_list': historic_list, 'error_list':error_list}
+                information_list.append(information_dict)
+        response = {'series_folder':series_folder, 'information':information_list}
+        return response
                  
                 
