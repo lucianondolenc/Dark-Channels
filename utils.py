@@ -23,7 +23,7 @@ class Utils:
                 lines = url_file.readlines()
                 lines = [line.strip() for line in lines if len(line) > 5]
                 lines = list(dict.fromkeys(lines))
-                lines = random.sample(lines, 8)
+                lines = random.sample(lines, 40)
                 url_dict = {file:lines}
                 url_list.append(url_dict)
             except:

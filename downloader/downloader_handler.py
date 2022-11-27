@@ -27,7 +27,7 @@ class DownloaderHandler:
                             error_list.append(url)
                     elif 'tiktok' in url:
                         pass
-                information_dict = {'item_name':item_name, 'historical_list': historic_list, 'error_list':error_list}
+                information_dict = {'item_name':item_name, 'historic_list': historic_list, 'error_list':error_list}
                 information_list.append(information_dict)
         response = {'series_folder':series_folder, 'information':information_list}
         return response
